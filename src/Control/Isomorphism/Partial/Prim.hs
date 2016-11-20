@@ -58,6 +58,7 @@ ignore x = Iso f g where
 -- `Iso` $\times$ `Iso` to `Iso`, so that we have the
 -- bifunctorial map `***` which allows two separate isomorphisms
 -- to work on the two components of a tuple.
+infix 8 ***
 (***) :: Iso alpha beta -> Iso gamma delta -> Iso (alpha, gamma) (beta, delta)
 i *** j = Iso f g where
   f (a, b) = liftM2 (,) (apply i a) (apply j b)
@@ -65,6 +66,7 @@ i *** j = Iso f g where
 
 -- | The mediating arrow for sums constructed with `Either`.
 -- This is not a proper partial isomorphism because of `mplus`.
+infix 8 |||
 (|||) :: Iso alpha gamma -> Iso beta gamma -> Iso (Either alpha beta) gamma
 i ||| j = Iso f g where
   f (Left x) = apply i x
